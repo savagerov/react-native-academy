@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Style the header */
+header {
+  background-color: rgb(233, 212, 154);
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: rgb(95, 8, 8);
+}
+
+#navigation {
+
+  font-size:10px;
+  margin: 2em;
+}
+body {
+  margin: 0;
+}
+
+#main {
+  background: #ccc;
+}
+
+#main>section {
+  margin-left: 120%;
+  margin-right: 120%;
+}
+
+article {
+  float: left;
+  height:400px;
+  padding: 20px;
+  width: 50%;
+  background-color: rgb(233, 212, 154);
+} 
+article h2 {
+  color: rgb(80, 184, 184);
+}
+
+.row {
+  clear: both;
+}
+
+/* Clear floats after the columns */
+section:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  float: left;
+  width: 100%;
+  background-color: rgb(174, 170, 170);
+  padding: 40px;
+  text-align: center;
+  color: rgb(231, 231, 231);
+}
+
+aside {
+  width: 100%;
+
+}
+
+aside img {
+ 
+  width: 75%;
+}
+
+.image {
+  width: 100%;
+  height: 140px;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav,
+  article,
+  aside {
+    width: 100%;
+    height: auto;
+  }
+
+  #articles {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 960px) {
+  article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 1500px) {
+  article {
+    width: 33%;
+  }
+}
