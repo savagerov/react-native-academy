@@ -1,0 +1,9 @@
+{
+  "name": "03-ea6-features-lab",
+  "version": "1.0.0",
+  "description": "ECMAScript 6+ novelties demo",
+  "main": "index.js",
+  "repository": "https://github.com/savagerov/react-native-academy.git",
+  "author": "Sava Gerov",
+  "license": "Apache-2.0"
+}
