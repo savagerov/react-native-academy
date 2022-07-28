@@ -1,0 +1,23 @@
+{
+  "name": "03-ea6-features-lab",
+  "version": "1.0.0",
+  "description": "ECMAScript 6+ novelties demo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savagerov/react-native-academy.git"
+  },
+  "author": "Sava Gerov",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "bugs": {
+    "url": "https://github.com/savagerov/react-native-academy/issues"
+  },
+  "homepage": "https://github.com/savagerov/react-native-academy#readme",
+  "keywords": []
+}
