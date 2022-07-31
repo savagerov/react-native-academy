@@ -19,6 +19,10 @@ const getBookElement = function (book) {
         `;
     return bookElem;
 };
+
+
+// tested few 
+// things 
   function submitEvent(event) {
     event.preventDefault();
     console.log(event);
