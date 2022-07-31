@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <script src="github-async-demo.js" defer></script>
+    <script src="https://kit.fontawesome.com/19ea78e580.js" crossorigin="anonymous"></script>
     <title>Books-React-Native</title>
 </head>
 <body>
@@ -19,12 +20,13 @@
             <a class="active" href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <input type="text" src="github-async-demo.js" placeholder="Search..">
-            <!-- <button onclick="searchBook()">Search</button>
-            <input type="text" id="rightInput" placeholder="Search"/> -->
-            <button type="submit"><i class="fa-solid fa-magnifying-glass" src="github-async-demo.js"></i></button>
-      
-        </div>
+            <form class="navContainer">
+                <input type="text" id="rightInput" placeholder="Search.."/>
+                <!-- <button onclick="searchBook()">Search</button>
+                <input type="text" id="rightInput" placeholder="Search"/> -->
+                <button type="submit"><i class="fa-solid fa-magnifying-glass" src="github-async-demo.js"></i></button>
+            </form>
+            </div>
         <!-- <a href="#">Section 1</a>
         <a href="#">Section 2</a>
         <a href="#">Section 3</a>
@@ -43,7 +45,7 @@
             </li>
         </ul>
     </nav> -->
-    <div id="results">
+    <div id="results">  
     <!-- <section id="main">
         <article>
             <h1 id="londonEye">London Eye</h1>

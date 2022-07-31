@@ -28,31 +28,25 @@ function submitEvent(event) {
 const form = document.querySelector(".navContainer");
 form.addEventListener("submit", submitEvent);
 
-async function init() {
-  try {
+async function init(input = "java") {
+  // try {
+    const search = input;
     const resultsElem = document.getElementById("results");
     const usersResp = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent("Search..")}&maxResults=9`
+      `https://www.googleapis.com/books/v1/volumes?q=${search}`
     );
     const users = await usersResp.json();
     console.log(users);
-
+    resultsElem.innerHTML = "";
     users.items.forEach((book) => {
       resultsElem.appendChild(getBookElement(book));
     });
-  } catch (err) {
-    console.log("Error", err);
-  } finally {
-    console.log("Demo finished");
+  // } catch (err) {
+  //   console.log("Error", err);
+  // } finally {
+  //   console.log("Demo finished");
 
-}}
-
-// init();
-
-// function searchBook() {
-//   const form = document.getElementById('results');
-//     form.addEventListener("submit", () =>{
-//         event.preventDefault();
-//         init(); 
-//     } );
 // }
+}
+
+init();
