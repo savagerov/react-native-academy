@@ -1,0 +1,17 @@
+{
+  "name": "04-myblogs-rest-ea6",
+  "version": "1.0.0",
+  "description": "REST, HTTP, json-server with ES6+ web client demo",
+  "main": "index.js",
+  "repository": "https://github.com/savagerov/react-native-academy",
+  "author": "Sava Gerov",
+  "license": "Apache-2.0",
+  "scripts": {
+    "api" : "json-server db.json --routes routes.json ",
+    "start": "lite-server --port-3000"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "lite-server": "^2.6.1"
+  }
+}
