@@ -7,8 +7,8 @@
   "author": "Sava Gerov",
   "license": "Apache-2.0",
   "scripts": {
-    "api" : "json-server db.json --routes routes.json ",
-    "start": "lite-server --port-3000"
+    "api" : "json-server db.json --routes routes.json --port 4000",
+    "start": "lite-server"
   },
   "devDependencies": {
     "json-server": "^0.17.0",

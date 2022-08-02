@@ -1,4 +1,4 @@
-import { addNewPost, getAllPosts } from "./blogs-api-client.js";
+import { addNewPost, getAllPosts ,deleteFromBlogs, editPostFromBlogs  } from "./blogs-api-client.js";
 import { chipsInstances } from "./materialize-helpers.js";
 
 const postsSection = document.getElementById("posts");
@@ -6,6 +6,7 @@ const errorsDiv = document.getElementById("errors");
 const addPostForm = document.getElementById("add-post-form");
 addPostForm.addEventListener('submit', handleSubmitPost);
 addPostForm.addEventListener('reset', resetform);
+
 
 async function init() {
   try {
@@ -52,8 +53,8 @@ export function addPost(post) {
       </div>
       `;
     postsSection.insertAdjacentElement("beforeend", postElem);
-    postElem.querySelector('#delete').addEventListener('click', event => deletePost(post.id));
-    
+    postElem.querySelector("#delete").addEventListener("click", (event) => deletePost(post.id));
+    postElem.querySelector("#edit").addEventListener("click", (event) => editPost(post.id));
   }
   
 
@@ -64,6 +65,11 @@ async function handleSubmitPost(event) {
     const newPost = {};
     for (const entry of formData.entries()) {
       newPost[entry[0]] = entry[1];
+    }
+    if(post.id==0){
+      editPostFromBlogs(post.id) ;
+      addNewPost(post);
+
     }
     const tags = chipsInstances[0].chipsData.map((chips) => chips.tag);
     // console.log(tags);
@@ -79,16 +85,54 @@ async function handleSubmitPost(event) {
 
 export function resetform() {
     addPostForm.reset();
-    const instance = chipsInstances;
-    while(instance.chipsData.length > 0) {
-        instance.deleteChip(0);
+    while (chipsInstances[0].chipsData.length > 0) {
+      chipsInstances[0].deleteChip(0);
     }
 }
 
-export function deletePost(postId) {
-    const del = document.getElementById(postId);
-    del.remove();
-    deletePost(del);
+async function deletePost(id) {
+  try {
+    deleteFromBlogs(id);
+    document.getElementById(id).remove();
+  } catch (err) {
+    showError(err);
+  }
 }
 
+// async function editPost(id){
+//   try {
+//     editPostFromBlogs(id);
+//     document.getElementById(id).ed;
+//   } catch(err) {
+//     showError(err);
+//   }
+// }
+
+export function editPost(post) {
+  editPostFromBlogs(post);
+  scrollTo(Headers);
+  addPostForm.reset();
+}
+
+// window.addEventListener('click' , () => {
+//   const form = document.querySelector("#new-task-from");
+//   const input = document.querySelector("#new-task-input");
+//   const list_el = document.querySelector("#tasks");
+
+//   form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+    
+//     const task = input.value;
+
+//     if (!task) {
+//         alert("Please fill out the task");
+//         return;
+//     }
+
+//     const task_el = document.createElement("div");
+//     task_el.classList.add("task");
+//   })
+// })
+
 init();
+
