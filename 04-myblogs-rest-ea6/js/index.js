@@ -66,11 +66,10 @@ async function handleSubmitPost(event) {
     for (const entry of formData.entries()) {
       newPost[entry[0]] = entry[1];
     }
-    if(post.id==0){
-      editPostFromBlogs(post.id) ;
-      addNewPost(post);
-
-    }
+    // if(post.id==0){
+    //   editPostFromBlogs(post.id) ;
+    //   addNewPost(post);
+    //}
     const tags = chipsInstances[0].chipsData.map((chips) => chips.tag);
     // console.log(tags);
     newPost["tags"] = tags;
@@ -113,26 +112,6 @@ export function editPost(post) {
   scrollTo(Headers);
   addPostForm.reset();
 }
-
-// window.addEventListener('click' , () => {
-//   const form = document.querySelector("#new-task-from");
-//   const input = document.querySelector("#new-task-input");
-//   const list_el = document.querySelector("#tasks");
-
-//   form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-    
-//     const task = input.value;
-
-//     if (!task) {
-//         alert("Please fill out the task");
-//         return;
-//     }
-
-//     const task_el = document.createElement("div");
-//     task_el.classList.add("task");
-//   })
-// })
 
 init();
 

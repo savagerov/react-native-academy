@@ -1,0 +1,56 @@
+GET http://localhost:3000/api/posts HTTP/1.1
+
+###
+
+GET http://localhost:3000/comments HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/posts HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Using REST Client",
+    "content": "REST Client is easy ...",
+    "tags": [
+      "rest",
+      "rest-client",
+      "http",
+      "crud"
+    ],
+    "imageUrl": "https://res.cloudinary.com/practicaldev/image/fetch/s--FUjuPIs8--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/452qob0efqpz249wrvnm.png",
+    "authorId": 1
+}
+
+### 
+
+PUT  http://localhost:3000/api/posts/3 HTTP/1.1
+content-type: application/json
+
+{
+    "id": 3,
+    "title": "REST Client",
+    "content": "REST Client is relatively easy ...",
+    "tags": [
+      "rest",
+      "rest-client",
+      "http",
+      "easy"
+    ],
+    "imageUrl": "https://res.cloudinary.com/practicaldev/image/fetch/s--FUjuPIs8--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/452qob0efqpz249wrvnm.png",
+    "authorId": 1
+}
+### 
+
+PATCH  http://localhost:3000/posts/3 HTTP/1.1
+content-type: application/json
+
+{
+    
+    "title": "REST Client",
+}
+
+###
+
+DELETE http://localhost:3000/api/posts/9 HTTP/1.1
+ 
