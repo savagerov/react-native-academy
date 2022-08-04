@@ -1,35 +1,56 @@
-import { BlogsAPI } from "./blogs-api-client.js";
-import { Post, PostCreateDto } from "./posts.js";
-import { IdType } from "./shared-types.js";
+import { BlogsAPI } from './blogs-api-client.js';
+import { Post, PostCreateDto } from './posts.js';
+import { IdType } from './shared-types.js';
+import { AppStateStore } from './state-store.js';
 
-const postsSection = document.getElementById("posts")!;
-const errorsDiv = document.getElementById("errors")!;
-const addPostForm = document.getElementById("add-post-form")! as HTMLFormElement;
-addPostForm.addEventListener('submit', handleSubmitPost);
-addPostForm.addEventListener('reset', resetform);
+// interface BlogsControllerType {
+//     postsSection: HTMLElement;
+//     erorrsDiv: HTMLElement;
+//     addPostForm: HTMLFormElement;
+//     resetButton: HTMLButtonElement 
+//     // init: () => void;
+//     init(): Promise<void>;
+// }
 
+class BlogsController  {
+  postsSection = document.getElementById("posts")!;
+  erorrsDiv = document.getElementById("errors")!;  
+  addPostForm = document.getElementById("add-post-form")! as HTMLFormElement;
+  resetButton = document.getElementById("form-reset-button")! as HTMLButtonElement; 
 
-async function init() {
-  try {
-    const allPosts = await BlogsAPI.getAllPosts();
-    showPosts(allPosts);
-  } catch (err) {
-    showError(err);
+  async init() {
+    this.addPostForm.addEventListener('submit', this.handleSubmitPost.bind(this));
+    this.resetButton.addEventListener('click', this.resetForm.bind(this));
+    try {
+      const allPosts = await BlogsAPI.getAllPosts();
+      AppStateStore.allPosts = allPosts; 
+      this.showPosts(allPosts);
+    } catch (err) {
+      this.showError(err);
+    }
   }
-}
 
-export function showPosts(posts: Post[]) {
-  posts.forEach((post) => addPost(post));
-}
-
-export function showError(err: any) { 
-  errorsDiv.innerHTML = `<div>${err}</div?>`; 
-}
-
-export function addPost(post: Post) {
+  showPosts(posts: Post[]) {
+    posts.forEach((post) => this.addPostDOM(post));
+  }
+  
+  showError(err: any) { 
+    this.erorrsDiv.innerHTML = `<div>${err}</div?>`; 
+  }
+  
+  addPostDOM(post: Post) {
     const postElem = document.createElement('article');
     postElem.setAttribute('id', post.id.toString());
     postElem.className = "col s12 m6 l4";
+    this.updateArticleInnerHtml(postElem, post);
+    this.postsSection.insertAdjacentElement("beforeend", postElem);
+  }
+  updatePostDOM(post: Post) {
+    const postElem = document.getElementById(post.id.toString())!;
+    this.updateArticleInnerHtml(postElem, post);
+  }
+
+  private updateArticleInnerHtml(postElem: HTMLElement, post: Post) {
     postElem.innerHTML = `
       <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
@@ -44,66 +65,84 @@ export function addPost(post: Post) {
         <p>${post.content}</p>
       </div>
       <div class="card-action">
-        <button class="btn waves-effect waves-light" type="button" id="edit">Edit
+        <button class="btn waves-effect waves-light" type="button" id="edit${post.id}">Edit
           <i class="material-icons right">send</i>
         </button>
-        <button class="btn waves-effect waves-light red lighten-1" type="button" id="delete">Delete
+        <button class="btn waves-effect waves-light red lighten-1" type="button" id="delete${post.id}">Delete
           <i class="material-icons right">clear</i>
         </button>
       </div>
       </div>
       `;
-    postsSection.insertAdjacentElement("beforeend", postElem);
-    postElem.querySelector("#delete")!.addEventListener("click", (event) => deletePost(post.id));
-    postElem.querySelector("#edit")!.addEventListener("click", (event) => editPost(post.id));
+    postElem.querySelector(`#delete${post.id}`)!.addEventListener('click', (event) => this.deletePost(post.id));
+    postElem.querySelector(`#edit${post.id}`)!.addEventListener('click', (event) => this.editPost(post));
+  }
+
+  editPost(post: Post) {
+    this.fillPostForm(post);
+    window.scrollTo(0,0);
+    AppStateStore.editedPost = post;
+  }
+
+  fillPostForm(post: Post) {
+    let field: keyof Post;
+    for (field in post) {
+      (document.getElementById(field) as HTMLFormElement).value = post[field];
+      const label = document.querySelector(`#add-post-form label[for=${field}]`);
+      if(label) {
+        label.className = 'active';
+      }
+  
+    }
+    
+  }
+  async handleSubmitPost(event: SubmitEvent) {
+    try {
+      event.preventDefault();
+      const formData = new FormData(this.addPostForm);
+      type PostDict = {
+        [key:string]: string 
+      };
+      const np: PostDict = {};
+      formData.forEach((value, key) => {
+        np[key] = value.toString();
+      })
+      // const post = newPost as unknown as Post;
+      if(np.id) {
+        const newPost = new Post(parseInt(np.id) ,np.title, np.content, np.tags.split(/\W+/), np.imageUrl, parseInt(np.authorId) || 1);
+        const updated = await BlogsAPI.updatePost(newPost);
+        this.updatePostDOM(updated);
+        AppStateStore.editedPost = undefined;
+      } else {
+        const newPost = new PostCreateDto(np.title, np.content, np.tags.split(/\W+/), np.imageUrl, parseInt(np.authorId) || 1);
+        const created = await BlogsAPI.addNewPost(newPost);
+        this.addPostDOM(created);
+      }
+      this.resetForm();
+    } catch (err) {
+      this.showError(err); 
+    }
+  }
+
+  resetForm() {
+    if(AppStateStore.editedPost) {
+      this.fillPostForm(AppStateStore.editedPost);
+    } else {
+    this.addPostForm.reset();
+    }
+  }
+  async deletePost(postId: IdType) {
+    try {
+      await BlogsAPI.deletePostById(postId);
+      document.getElementById(postId.toString())?.remove();
+    }
+     catch(err) {
+      this.showError(err);
+     }
   }
 
 
-
-async function handleSubmitPost(event: SubmitEvent) {
-  try {
-    event.preventDefault();
-    const formData = new FormData(addPostForm);
-    type PostDict = {
-      [key:string]: string 
-    };
-    const np: PostDict = {};
-    formData.forEach((value, key) => {
-      np[key] = value.toString();
-    })
-    // const post = newPost as unknown as Post;
-    const newPost = new PostCreateDto(np.title, np.content, np.tags.split(/\W+/), np.imageUrl, parseInt(np.authorId) || 1);
-    const created = await BlogsAPI.addNewPost(newPost);
-    addPost(created);
-    resetform();
-  } catch (err) {
-    showError(err); 
-  }
 }
 
-export function resetform() {
-    addPostForm.reset();
-}
-
-function deletePost(id: IdType) {
-    BlogsAPI.deletePostById(id);
-}
-
-
-// async function editPost(id: IdType){
-//   try {
-//     BlogsAPI.updatePost(id);
-//     scrollTo(addPost((post: Post) => void).postElem)
-//   } catch(err) {  (post: Post) => void  
-//     showError(err);
-//   }
-// }
-
-// export function editPost(post) {
-//   editPostFromBlogs(post);
-//   scrollTo(Headers);
-//   addPostForm.reset();
-// }
-
-init();
-
+const blogsController = new BlogsController();
+blogsController.init();

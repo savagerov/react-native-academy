@@ -47,6 +47,27 @@
         "newProblem"
       ],
       "id": 17
+    },
+    {
+      "title": "asdasdasd",
+      "content": "asdasdadsasd\nNEW",
+      "tags": [
+        "asdads",
+        "new"
+      ],
+      "imageUrl": "https://dev.bg/wp-content/uploads/2016/09/6038586442907648-700x394.png",
+      "authorId": 1,
+      "id": 18
+    },
+    {
+      "title": "asdasd new edit",
+      "content": "sadsda",
+      "tags": [
+        "reset"
+      ],
+      "imageUrl": "https://www.shrekthemusical.co.uk/wp-content/uploads/2022/05/Shrek.jpg",
+      "authorId": 1,
+      "id": 19
     }
   ],
   "comments": [
