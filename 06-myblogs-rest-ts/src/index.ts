@@ -140,8 +140,6 @@ class BlogsController  {
       this.showError(err);
      }
   }
-
-
 }
 
 const blogsController = new BlogsController();
