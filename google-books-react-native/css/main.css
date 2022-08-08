@@ -26,6 +26,19 @@ nav a {
     padding: 15px 20px;
 }
 
+nav div form { 
+    margin-left: 71.5%;
+} 
+
+nav div form button {
+    margin-right:10px;
+    margin-top: 7px;
+}
+
+nav div form label {
+    padding: 100px;
+}
+
 nav a:hover {
     background-color: #ddd;
     color: black;
@@ -74,6 +87,12 @@ button.topnav {
     display: flex;
 }
 
+#bnt {
+    display: flex;
+    position: relative;
+    margin: 9px;
+    margin-top: 10px;
+}
   
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -105,11 +124,11 @@ button.topnav {
   /* Style the search box inside the navigation bar */
   .topnav input[type=text] {
     float: right;
-    padding: 6px;
+    padding: 7px;
     border: none;
     margin-top: 8px;
     margin-right: 16px;
-    font-size: 17px;
+    font-size: 18px;
   }
   
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
