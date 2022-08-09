@@ -1,23 +1,22 @@
 {
-  "name": "03-ea6-features-lab",
+  "name": "05-ts-intro",
   "version": "1.0.0",
-  "description": "ECMAScript 6+ novelties demo",
+  "description": "Introduction to Typescript",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/savagerov/react-native-academy.git"
-  },
-  "author": "Sava Gerov",
+  "repository": "https://github.com/iproduct/react-native-training",
+  "author": "Trayan Iliev",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "lite-server"
+    "api": "json-server db.json --routes routes.json --port=4000",
+    "start": "concurrently --kill-others \"tsc -w\" \"lite-server\""
   },
   "devDependencies": {
-    "lite-server": "^2.6.1"
-  },
-  "bugs": {
-    "url": "https://github.com/savagerov/react-native-academy/issues"
-  },
-  "homepage": "https://github.com/savagerov/react-native-academy#readme",
-  "keywords": []
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.21.0",
+    "json-server": "^0.17.0",
+    "lite-server": "^2.6.1",
+    "typescript": "^4.7.4"
+  }
 }
