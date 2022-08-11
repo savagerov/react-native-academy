@@ -158,7 +158,7 @@ class BlogsController {
     formData.forEach((value, key) => {
       np[key] = value.toString();
     })
-    return new user(np.title, np.content, np.tags.split(/\W+/), np.imageUrl, np.authorId ? parseInt(np.authorId): undefined , parseInt(np.id));
+    return new User(np.title, np.content, np.tags.split(/\W+/), np.imageUrl, np.authorId ? parseInt(np.authorId): undefined , parseInt(np.id));
   }
 
   resetForm = () => {

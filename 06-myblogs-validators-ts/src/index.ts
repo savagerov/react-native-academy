@@ -75,31 +75,31 @@ class BlogsController {
         <img class="activator" src="${user.pictureUrl}">
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.firstName}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.firstName}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.lastName}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.lastName}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.username}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.username}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.password}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.password}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.gender}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.gender}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.pictureUrl}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.pictureUrl}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">${user.shortDescription}<i class="material-icons right" required>more_vert</i></span>
+        <span class="card-title activator grey-text text-darken-4">${user.shortDescription}<i class="material-icons right" >more_vert</i></span>
         <p>Author: ${user.authorId}, Tags: ${user.tags ? user.tags.join(', ') : 'no tags'}</p>
       </div>
       <div class="card-action">
@@ -153,6 +153,7 @@ class BlogsController {
   }
 
   getUserFormSnapshot(): User{
+    const user = 
     const formData = new FormData(this.adduserForm);
     const np: FormFieldDict<string> = {};
     formData.forEach((value, key) => {
@@ -224,16 +225,16 @@ class BlogsController {
     this.showError(AppStateStore.UserFormErrors.join(''));
   }
 // random ID
-  ID = function () {
-    const numberId = [];
-    while (numberId.length < 1) {
-      const r = Math.floor(Math.random() * 10000) + 1; //long enough ?
-      if (numberId.indexOf(r) === -1) {
-        numberId.push(r);
-      }
-    }
-    console.log("Personal Id: " + numberId);
-  };
+//   ID = function () {
+//     const numberId = [];
+//     while (numberId.length < 1) {
+//       const r = Math.floor(Math.random() * 10000) + 1;
+//       if (numberId.indexOf(r) === -1) {
+//         numberId.push(r);
+//       }
+//     }
+//     console.log("Personal Id: " + numberId);
+//   };
 }
 
 const blogsController = new BlogsController();

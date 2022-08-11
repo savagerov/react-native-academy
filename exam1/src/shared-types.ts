@@ -10,3 +10,4 @@ export enum userRole{
     user1 = "USER",
     user2 = "ADMIN"
 }
+

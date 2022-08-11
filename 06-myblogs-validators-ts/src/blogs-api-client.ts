@@ -11,7 +11,22 @@ export interface UsersApiClient {
     deleteUserById(id: IdType): Promise<User>;
 }
 
-class UserApiClientImpl {
+class UserApiClientImpl implements UsersApiClient{
+    // getAllUsers(): Promise<User[]> {
+    //     throw new Error("Method not implemented.");
+    // }
+    // getUserById(id: IdType): Promise<User> {
+    //     throw new Error("Method not implemented.");
+    // }
+    // addNewUser(user: UserReg): Promise<User> {
+    //     throw new Error("Method not implemented.");
+    // }
+    // updateUser(user: User): Promise<User> {
+    //     throw new Error("Method not implemented.");
+    // }
+    // deleteUserById(id: IdType): Promise<User> {
+    //     throw new Error("Method not implemented.");
+    // }   
     
     async getAllPosts(): Promise<User[]> {
         return this.handleRequest(API_BASE_URL);

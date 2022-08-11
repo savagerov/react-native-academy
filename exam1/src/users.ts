@@ -22,18 +22,20 @@ export interface UserReg {
 //     ) { }
 // }
 
-export interface User {
-        tags: any;
-        authorId: number;
-        firstName: string,
-        lastName: string,
-        username: string,
-        password: string,
-        gender: string,
-        userRoles: userRole,
-        shortDescription: string,
-        pictureUrl: string,
-        id: IdType,
+export class User {
+    constructor(
+        public tags: any,
+        public authorId: number,
+        public firstName: string,
+        public lastName: string,
+        public username: string,
+        public password: string,
+        public gender: string,
+        public userRoles: userRole,
+        public shortDescription: string,
+        public pictureUrl: string,
+        public id: IdType
+        ) {}
 }
 
 export interface UserRepository extends Repository<IdType, User> {

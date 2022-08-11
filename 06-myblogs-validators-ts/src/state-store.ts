@@ -19,9 +19,12 @@ export const AppStateStore: AppState = {
     //   Validators.len(3, 6),
     // ],
     firstName: [Validators.required(),Validators.pattern(/^[A-Z a-z]/),Validators.len(2,15)],
+    username: [Validators.required(),Validators.pattern(/^[A-Z a-z]/),Validators.len(2,15)],
+    password: [Validators.required(),Validators.pattern(/^[A-Z a-z]/),Validators.len(2,15)],
+    // pictureUrl[Validators.required(),Validators.pattern(/^(ftp|http|https):\/\/[^ "]+$/)],
     lastName: [Validators.required(),Validators.pattern(/^[A-Z a-z]/),Validators.len(2,15)],
     shortDescription: [Validators.required(),Validators.pattern(/^[A-Z a-z]{5}/),Validators.len(10, 25),],
-    // PictureUrl: [Validators.required(),Validators.pattern(/^(ftp|http|https):\/\/[^ "]+$/)],
+    id: [Validators.required(),Validators.pattern(/^[0-9]/),Validators.len(2,15)]
   },
   UserFormErrors: [],
   UserFormState: {},

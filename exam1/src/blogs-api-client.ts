@@ -1,7 +1,7 @@
 import { User, UserReg } from "./users.js";
 import { IdType } from "./shared-types.js";
 
-const API_BASE_URL = "http://localhost:4000/api/posts";
+const API_BASE_URL = "http://localhost:4000/api/users";
 
 export interface UsersApiClient {
     getAllUsers(): Promise<User[]>;
@@ -13,15 +13,15 @@ export interface UsersApiClient {
 
 class UserApiClientImpl {
     
-    async getAllPosts(): Promise<User[]> {
+    async getAllUsers(): Promise<User[]> {
         return this.handleRequest(API_BASE_URL);
     }
 
-    async getPostById(id: IdType): Promise<User> {
+    async getUserById(id: IdType): Promise<User> {
         return this.handleRequest(`${API_BASE_URL}/${id}`);
     }
 
-    async addNewPost(user: UserReg): Promise<User> {
+    async addNewUser(user: UserReg): Promise<User> {
         return this.handleRequest(API_BASE_URL, {
             method: 'POST',
             headers: {
@@ -31,7 +31,7 @@ class UserApiClientImpl {
         });
     }
 
-    async updatePost(user: User): Promise<User> {
+    async updateUser(user: User): Promise<User> {
         return this.handleRequest(`${API_BASE_URL}/${user.id}`, {
             method: 'PUT',
             headers: {
@@ -41,7 +41,7 @@ class UserApiClientImpl {
         });
     }
 
-    async deletePostById(id: IdType): Promise<User> {
+    async deleteUserById(id: IdType): Promise<User> {
         return this.handleRequest(`${API_BASE_URL}/${id}`, {
             method: 'DELETE'
         });

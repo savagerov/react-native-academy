@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/savagerov/react-native-academy.git",
   "author": "Sava Gerov",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
 }
