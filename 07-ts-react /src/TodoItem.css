@@ -33,3 +33,13 @@
 .TodoItem-button.danger:hover {
     color: rgb(255, 35, 21)
 }
+
+.TodoItem-button.danger1 {
+    color:blueviolet
+}
+
+.TodoItem-button.danger1:hover{
+    color: rgb(221, 44, 182)
+}
+  
+  

@@ -13,6 +13,11 @@ const TodoItem = ({todo, onUpdate , onDelete}: TodoItemProps) => {
     function handleCompletion(event: React.MouseEvent) {
         onUpdate({...todo, status: TodoStatus.Completed})
     }
+
+    function handleCached(event: React.MouseEvent) {
+        onDelete({...todo, status: TodoStatus.Canceled})
+    }
+
     return (
         <div className="TodoItem" >
             <span className="TodoItem-text">
@@ -25,6 +30,16 @@ const TodoItem = ({todo, onUpdate , onDelete}: TodoItemProps) => {
                     <span className="TodoItem-button fas fa-check-circle"
                         onClick={handleCompletion}></span> :
                     <span className="TodoItem-button fas fa-times-circle danger"
+                        onClick={() => onUpdate(todo)}></span>
+                }
+            </span>
+            
+            <span className="TodoItem-right"> 
+                <span className="TodoItem-status">{TodoStatus[todo.status]}</span>
+                {todo.status === TodoStatus.Canceled ?
+                    <span className="TodoItem-button fas fa-check-circle"
+                        onClick={handleCached}></span> :
+                    <span className="TodoItem-button fas fa-times-circle danger1"
                         onClick={() => onDelete(todo)}></span>
                 }
             </span>

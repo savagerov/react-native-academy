@@ -49,18 +49,24 @@ class TodoApp extends Component<{} , TodoAppState> {
         this.setState({filter: status})
     }
 
+    handleCanceledTodo = (status: FilterType) => {
+        this.setState({filter: status})
+    }
+
     render(): React.ReactNode {
         return (
             <div className="App">
                 <header className="App-header">
                     <h2>TODO Demo</h2>
-                    <TodoInput onCreateTodo={this.handleCreateTodo} />
-                    <TodoFilter filter={this.state.filter} onFilterChange={this.handlefilterChange} />
+                    <TodoInput onCreateTodo={this.handleCreateTodo}/>
+                    <TodoFilter filter={this.state.filter} onFilterChange={this.handlefilterChange} 
+                    />
                     <TodoList 
                      todos={this.state.todos}
                      filter={this.state.filter}
                      onUpdate={this.handleUpdateTodo}
                      onDelete={this.handleDeleteTodo}
+                     onCanceled={this.handleCanceledTodo}
                     />
                 </header>
             </div>
