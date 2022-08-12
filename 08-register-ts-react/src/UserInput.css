@@ -1,0 +1,39 @@
+.UserInput-form { 
+    flex: 100%;
+    justify-content:space-around;
+    display: flex;
+    flex-direction:column;
+    width: 85%;
+}
+
+form label {
+    display:flex;
+}
+
+form input{
+    flex:100;
+    padding: 10px;
+}
+
+form button {
+    padding: 7px;
+}
+
+.TodoFilter {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#UserInput-user-date1{
+    font-size: 25px;
+    justify-content:right;
+    margin-bottom: 10px;
+}
+
+#img {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
