@@ -55,8 +55,8 @@ class UserInput extends Component<UserInputProps,UserInputState> {
                 <input type="text" role="listbox" id="UserInput-user-gender" name="gender" value={this.state.password} onChange={this.handleTextChanged} />
                 <label htmlFor="UserInput-user-text">Profile Picture</label>
                 <img id="img" src="https://static.vecteezy.com/system/resources/thumbnails/005/571/769/small/default-avatars-photo-placeholders-profile-pictures-male-and-female-vector.jpg" alt="new"/>
-                <input type="Url" id="TodoInput-user-text-url" name="url" value={this.state.}
-                    onChange={this.handleTextChanged} placeholder="https://example.jpg/.png/.jpeg"/>
+                {/* <input type="Url" id="TodoInput-user-text-url" name="url" value={this.state.} */}
+                    {/* onChange={this.handleTextChanged} placeholder="https://example.jpg/.png/.jpeg"/> */}
                 <input type="url" id="UserInput-user-image" name="image"  onChange={this.handleTextChanged} /><br />
                 <label htmlFor="UserInput-user-date">Pick a date</label>
                 <input type="date" id="UserInput-user-date1" name="date" value={this.state.date} onChange={this.handleTextChanged} />

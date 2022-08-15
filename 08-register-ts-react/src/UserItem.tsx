@@ -23,7 +23,7 @@ const UserItem = ({user, onUpdate , onDelete}: UserItemProps) => {
             <span className="UserItem-text">
                 <span className="UserItem-id">{user.id}</span>
                 {user.firstName} {user.lastName} - {user.username} - {user.password} {user.gender}
-                <img className="UserItem-id" src={user?.userPicture} alt="Profile picture" />
+                {/* <img className="UserItem-id" src={user?.userPicture} alt="Profile picture" /> */}
             </span>
             <span className="UserItem-right">
                 {/* <span className="UserItem-status">{UserStatus[user.status]}</span> */}

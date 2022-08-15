@@ -5,12 +5,17 @@ import UserList from './UserList';
 import UserFilter from './UserFilter';
 import MOCK_USERS from './mock-users';
 import UserInput from './UserInput';
+import { Optional } from './shared-types';
+import { UsersAPI } from './rest-api-client';
 
 export type FilterType = UserStatus | undefined;
 
 interface UserAppState {
     users: User[];
-  filter: FilterType;
+    editedUser: Optional<User>,
+    filter: FilterType;
+    errors: string | undefined;
+
 }
 
 export interface UserListener {
@@ -23,8 +28,10 @@ export interface FilterChangeListener {
 
 class UserApp extends Component<{} , UserAppState> {
     state: Readonly<UserAppState> = {
-        users: MOCK_USERS,
-        filter: undefined
+        users: [],
+        editedUser: undefined,
+        filter: undefined,
+        errors: undefined
     }
 
     constructor(props: {}) {
@@ -32,19 +39,58 @@ class UserApp extends Component<{} , UserAppState> {
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
     }
 
-    
+    async componentDidMount() {
+        try {
+            const allUsers = await UsersAPI.findAll();
+            this.setState({users: allUsers, errors: undefined})
+        } catch(err) {
+            this.setState({errors: err as string})
+        }
+    }
 
     handleUpdateUser(user:User) {
-        this.setState(({users}) => ({users: users.map(td => td.id === user.id? user: td)}))
+        this.setState(({users}) => ({
+            users: users.map(td => td.id === user.id? user: td)
+        }))
     }
 
-    handleDeleteUser = (user: User) => {
-        this.setState(({users}) => ({users: users.filter(td => td.id !== user.id)}))
+    handleDeleteUser = async (user: User) => {
+        try {
+            await UsersAPI.deleteById(user.id);
+            this.setState(({users}) => ({
+                users: users.filter(td => td.id !== user.id),
+                errors: undefined
+            }));
+        } catch(err) {
+            this.setState({errors: err as string})
+        }
     }
 
-    handleCreateUser = (user: User) => {
-        this.setState(({users}) => ({users: users.concat(user)}))
+    handleCreateUser = async (user: User) => {
+        try {
+            if(user.id) { //edit user
+                const updated = await UsersAPI.update(user);
+                this.setState(({ users }) => ({
+                    users: users.map(td => td.id === updated.id ? updated : td),
+                    errors: undefined,
+                    editedUser: undefined
+                }));
+            } else { // create user
+                const created = await UsersAPI.create(user);
+                this.setState(({users}) => ({
+                    users: users.concat(created),
+                    errors: undefined
+                }));
+            }
+        } catch(err) {
+            this.setState({errors: err as string})
+        }
     }
+
+    handleEditUser = (user: User) => {
+        this.setState({ editedUser: user });
+      }
+    
 
     handlefilterChange = (status: FilterType) => {
         this.setState({filter: status})
@@ -64,6 +110,7 @@ class UserApp extends Component<{} , UserAppState> {
                      filter={this.state.filter}
                      onUpdate={this.handleUpdateUser}
                      onDelete={this.handleDeleteUser}
+                     onEdit={this.handleEditUser}
                     />
                 </header>
             </div>

@@ -21,7 +21,7 @@ export class User {
         public date = new Date(),
         public gender = Gender.MALE,
         public role = UserRole.USER,
-        public userPicture = `https://static.vecteezy.com/system/resources/thumbnails/005/571/769/small/default-avatars-photo-placeholders-profile-pictures-male-and-female-vector.jpg`,
+        public userPicture = ``,
         public shortDescription?: string,
         public status = UserStatus.ACTIVE,
     ) {}
